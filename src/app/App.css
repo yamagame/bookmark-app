@@ -1,0 +1,74 @@
+:root {
+  --mark-line-padding: 2px;
+  --mark-delete-color: white;
+  --mark-delete-bg-color: #F66;
+  --mark-insert-color: white;
+  --mark-insert-bg-color: #66F;
+}
+
+pre {
+  margin: 0;
+  padding: 0;
+}
+
+.mark-top-header {
+  height: 22px;
+  top: 0;
+  padding: 4px 10px 6px 10px;
+  font-size: 0.7em;
+  position: sticky;
+  background-color: white;
+  border-bottom: solid 1px lightgray;
+}
+
+.mark-container {
+  width: 100%;
+  display: flex;
+}
+
+.mark-cell {
+  flex: 1;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 10px;
+}
+
+.mark-cell-2 {
+  flex: 2;
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 10px;
+}
+
+.mark-cell-small {
+  max-width: 100px;
+}
+
+.mark-input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.mark-button {
+  margin-right: 10px;
+}
+
+.mark-body-container {
+  margin: 10px;
+  font-size: 0.7em;
+}
+
+.mark-card {
+  display: inline-block;
+  margin:  5px 5px 5px 5px;
+  padding: 5px 10px 5px 10px;
+  min-width: 48px;
+  min-height: 18px;
+  background-color: azure;
+  border: solid 2px lightgray;
+  vertical-align: middle;
+}
+
+.mark-selected {
+  border: solid 2px skyblue;
+}
