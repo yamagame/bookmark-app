@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 
 type Bookmark = {
-  index: number;
   name: string;
   url: string;
 };
@@ -10,9 +9,7 @@ type Bookmark = {
 const loadBookmarks = () => {
   const bookmarks = localStorage.getItem("bookmarks");
   if (typeof bookmarks !== "string") return null;
-  return (JSON.parse(bookmarks) as Bookmark[])
-    .filter((v) => v.url)
-    .map((v, i) => ({ ...v, index: i }));
+  return (JSON.parse(bookmarks) as Bookmark[]).filter((v) => v.url);
 };
 
 function App() {
@@ -37,8 +34,6 @@ function App() {
     const onClick = (e: MouseEvent) => {
       if (selectedMarks.length > 0) {
         setSelectedMarks([]);
-        // setName("");
-        // setUrl("");
       }
     };
     window.addEventListener("click", onClick);
@@ -51,15 +46,8 @@ function App() {
   const clickAddBookmark = (name: string, url: string) => {
     if (url === "") return;
     const title = name ? name : url;
-    setBookmarks((bookmarks) =>
-      [...bookmarks.filter((v) => v.url !== url), { name: title, url }].map((v, i) => ({
-        ...v,
-        index: i,
-      }))
-    );
+    setBookmarks((bookmarks) => [...bookmarks.filter((v) => v.url !== url), { name: title, url }]);
     setSelectedMarks([]);
-    // setName("");
-    // setUrl("");
   };
 
   return (
