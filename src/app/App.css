@@ -64,11 +64,22 @@ pre {
   padding: 5px 10px 5px 10px;
   min-width: 48px;
   min-height: 18px;
-  background-color: azure;
+  font-weight: bold;
   border: solid 2px lightgray;
   vertical-align: middle;
 }
 
-.mark-selected {
-  border: solid 2px skyblue;
+.mark-color {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  background-color: pink;
+}
+
+.mark-color-picker {
+  position: relative;
+  left: -8px;
+  top: 8px;
+  z-index: 2;
 }
