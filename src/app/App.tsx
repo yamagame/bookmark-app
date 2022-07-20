@@ -43,6 +43,7 @@ const rgba = (hex: string, alpha: number) => {
 };
 
 const defaultPickerColors = defaultColors.map((color) => rgba(color, alpha));
+const defaultColor = defaultColors[13];
 
 type Bookmark = {
   name: string;
@@ -59,7 +60,7 @@ const loadBookmarks = () => {
 function App() {
   const [name, setName] = React.useState("");
   const [openPicker, setOpenPicker] = React.useState(false);
-  const [color, setColor] = React.useState<string>(defaultColors[13]);
+  const [color, setColor] = React.useState<string>(defaultColor);
   const [url, setUrl] = React.useState("");
   const [bookmarks, setBookmarks] = React.useState<Bookmark[]>(loadBookmarks() || []);
   const [selectedMarks, setSelectedMarks] = React.useState<string[]>([]);
@@ -187,10 +188,10 @@ function App() {
       <div className="mark-body-container">
         {reversedBookmarks.map((v) => {
           const selected = selectedMarks.indexOf(v.url) >= 0;
-          const color = v.backgroundColor || "azure";
+          const color = v.backgroundColor || defaultColor;
           const fontColor =
             defaultColors.indexOf(color.toUpperCase()) > defaultColors.length / 2 ||
-            color === "azure"
+            color === defaultColor
               ? "#444"
               : "white";
           return (
@@ -212,7 +213,7 @@ function App() {
                 }
                 setName(v.name);
                 setUrl(v.url);
-                setColor(v.backgroundColor || "azure");
+                setColor(v.backgroundColor || defaultColor);
               }}>
               <a
                 href={v.url}
