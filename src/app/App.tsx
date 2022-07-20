@@ -91,7 +91,7 @@ function App() {
     };
   }, [selectedMarks]);
 
-  const clickAddBookmark = (name: string, url: string) => {
+  const clickAddBookmark = (name: string, url: string, color?: string) => {
     if (url === "") return;
     const title = name ? name : url;
     setBookmarks((bookmarks) => [
@@ -158,7 +158,7 @@ function App() {
             <button
               className="mark-button"
               onClick={() => {
-                clickAddBookmark(name, url);
+                clickAddBookmark(name, url, color);
               }}>
               Add
             </button>
@@ -223,7 +223,7 @@ function App() {
                 }}
                 target="_blank"
                 onClick={() => {
-                  clickAddBookmark(v.name, v.url);
+                  clickAddBookmark(v.name, v.url, v.backgroundColor);
                 }}>
                 {v.name}
               </a>
