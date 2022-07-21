@@ -83,3 +83,7 @@ pre {
   top: 8px;
   z-index: 2;
 }
+
+.mark-item {
+  margin-right: 10px;
+}

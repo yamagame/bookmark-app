@@ -64,6 +64,7 @@ function App() {
   const [url, setUrl] = React.useState("");
   const [bookmarks, setBookmarks] = React.useState<Bookmark[]>(loadBookmarks() || []);
   const [selectedMarks, setSelectedMarks] = React.useState<string[]>([]);
+  const [colorFilterState, setColorFilterState] = React.useState(false);
 
   React.useEffect(() => {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
@@ -131,6 +132,14 @@ function App() {
               e.stopPropagation();
               toggleColorPicker();
             }}></div>
+          <div className="mark-item">
+            <input
+              type="checkbox"
+              checked={colorFilterState}
+              onChange={() => setColorFilterState((v) => !v)}
+            />
+            <label>Filter</label>
+          </div>
           <div className="mark-cell-small">
             <button
               className="mark-button"
@@ -186,50 +195,58 @@ function App() {
         ) : null}
       </div>
       <div className="mark-body-container">
-        {reversedBookmarks.map((v) => {
-          const selected = selectedMarks.indexOf(v.url) >= 0;
-          const color = v.backgroundColor || defaultColor;
-          const fontColor =
-            defaultColors.indexOf(color.toUpperCase()) >= defaultColors.length / 2 ||
-            color === defaultColor
-              ? "#555"
-              : "white";
-          return (
-            <div
-              key={v.url}
-              className="mark-card"
-              style={{
-                backgroundColor: rgba(color, alpha),
-                border: selected ? `solid 2px blue` : `solid 2px white`,
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (e.shiftKey) {
-                  setSelectedMarks((s) => {
-                    return [...new Set([...s, v.url])];
-                  });
-                } else {
-                  setSelectedMarks([v.url]);
-                }
-                setName(v.name);
-                setUrl(v.url);
-                setColor(v.backgroundColor || defaultColor);
-              }}>
-              <a
-                href={v.url}
-                rel="noopener noreferrer"
+        {reversedBookmarks
+          .filter((v) => {
+            if (colorFilterState) {
+              const bgColor = v.backgroundColor || defaultColor;
+              if (color !== bgColor) return false;
+            }
+            return true;
+          })
+          .map((v) => {
+            const selected = selectedMarks.indexOf(v.url) >= 0;
+            const color = v.backgroundColor || defaultColor;
+            const fontColor =
+              defaultColors.indexOf(color.toUpperCase()) >= defaultColors.length / 2 ||
+              color === defaultColor
+                ? "#555"
+                : "white";
+            return (
+              <div
+                key={v.url}
+                className="mark-card"
                 style={{
-                  color: fontColor,
+                  backgroundColor: rgba(color, alpha),
+                  border: selected ? `solid 2px blue` : `solid 2px white`,
                 }}
-                target="_blank"
-                onClick={() => {
-                  clickAddBookmark(v.name, v.url, v.backgroundColor);
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (e.shiftKey) {
+                    setSelectedMarks((s) => {
+                      return [...new Set([...s, v.url])];
+                    });
+                  } else {
+                    setSelectedMarks([v.url]);
+                  }
+                  setName(v.name);
+                  setUrl(v.url);
+                  setColor(v.backgroundColor || defaultColor);
                 }}>
-                {v.name}
-              </a>
-            </div>
-          );
-        })}
+                <a
+                  href={v.url}
+                  rel="noopener noreferrer"
+                  style={{
+                    color: fontColor,
+                  }}
+                  target="_blank"
+                  onClick={() => {
+                    clickAddBookmark(v.name, v.url, v.backgroundColor);
+                  }}>
+                  {v.name}
+                </a>
+              </div>
+            );
+          })}
       </div>
     </>
   );
