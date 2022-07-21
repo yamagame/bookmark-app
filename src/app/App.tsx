@@ -190,9 +190,9 @@ function App() {
           const selected = selectedMarks.indexOf(v.url) >= 0;
           const color = v.backgroundColor || defaultColor;
           const fontColor =
-            defaultColors.indexOf(color.toUpperCase()) > defaultColors.length / 2 ||
+            defaultColors.indexOf(color.toUpperCase()) >= defaultColors.length / 2 ||
             color === defaultColor
-              ? "#444"
+              ? "#555"
               : "white";
           return (
             <div
