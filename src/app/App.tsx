@@ -134,11 +134,11 @@ function App() {
             }}></div>
           <div className="mark-item">
             <input
+              id="filterCheckbox"
               type="checkbox"
               checked={colorFilterState}
               onChange={() => setColorFilterState((v) => !v)}
             />
-            <label>Filter</label>
           </div>
           <div className="mark-cell-small">
             <button

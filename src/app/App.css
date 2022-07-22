@@ -85,5 +85,60 @@ pre {
 }
 
 .mark-item {
+  display: inline-block;
   margin-right: 10px;
+  height: 22px;
+}
+
+div.mark-top-header input[type=text] {
+  font-size: 1.2em;
+  border: #555 solid 1px;
+  height: 22px;
+}
+
+div.mark-top-header input[type=checkbox] {
+  appearance: none;
+  background-color: white;
+  display: inline-block;
+  border: 1px solid #555;
+  border-radius: 3px;
+  height: 16px;
+  width: 16px;
+}
+
+div.mark-top-header input[type="checkbox"]:checked {
+  background-color: #4489F7;
+}
+
+div.mark-top-header input[type="checkbox"]:checked::after {
+  content: '✔';
+  font-size: 20px;
+  position: relative;
+  top: -6px;
+  left: 2px;
+  color: white;
+  font-family: "Courier";
+}
+
+div.mark-top-header label {
+  display: inline-block;
+}
+
+div.mark-top-header button {
+  font-size: 1.2em;
+  direction: none;
+  border: #555 solid 1px;
+  height: 22px;
+  min-width: 48px;
+  background-color: white;
+  border-radius: 3px;
+  user-select: none;
+}
+
+div.mark-top-header button:hover {
+  background-color: #EEE;
+}
+
+div.mark-top-header button:active {
+  background-color: #888;
 }
